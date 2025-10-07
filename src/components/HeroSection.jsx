@@ -1,76 +1,107 @@
-// components/HomePage.jsx
-import React from 'react';
-import { FaRocket, FaPlay, FaSearch, FaProjectDiagram, FaDesktop, FaDownload, FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaExternalLinkAlt, FaBriefcase, FaCalendar, FaTools, FaPalette, FaLightbulb, FaCode, FaMobile, FaCloud } from 'react-icons/fa';
+
+import React, { useState } from 'react';
+import { FaRocket, FaPlay, FaSearch, FaProjectDiagram, FaDesktop, FaDownload, FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaExternalLinkAlt, FaBriefcase, FaCalendar, FaTools, FaPalette, FaLightbulb, FaCode, FaMobile, FaCloud, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const HomePage = () => {
-  // Sample projects data matching your screenshot
-  const projects = [
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  // Sample projects data - expanded with more projects
+  const initialProjects = [
     {
       id: 1,
-      title: "Rabid Ahmed",
-      subtitle: "A Software Engineer who has developed countless innovative solutions.",
-      description: "Revolutionize Your Intent Creation 💬️ Proct",
-      type: "Portfolio",
+      title: "Krishna Software Solutions",
+      subtitle: "A Software Engineer who builds modern, efficient, and visually appealing web applications.",
+      description: "Revolutionizing the Way Ideas Turn into Action 💡🚀",
+      type: "WebSite",
       tags: []
     },
     {
       id: 2,
-      title: "Revo",
-      subtitle: "Free Framer Template",
-      description: "",
-      type: "Template",
+      title: "Krishna Engineering College",
+      subtitle: "Designed and developed the official KEC Bhilai website with modern UI/UX and seamless navigation.",
+      description: "The official website of Krishna Engineering College Bhilai, providing information on courses, admissions, faculty, events, and campus updates through a modern, responsive, and user-friendly interface.",
+      type: "WebSite",
       tags: []
     },
     {
       id: 3,
-      title: "NajmAl",
-      subtitle: "SaaS Framer Template",
-      description: "",
-      type: "Template",
+      title: "Green Decor",
+      subtitle: "Created the frontend for Green Decore, a modern online gifting and decor store with interactive UI.",
+      description: "Developed the frontend of Green Decore, an online gifting and decor store, creating a responsive and visually appealing user interface",
+      type: "WebSite",
       tags: []
     },
     {
       id: 4,
-      title: "Nashra",
-      subtitle: "SaaS Framer Template",
-      description: "",
+      title: "Dr. K Gurunath",
+      subtitle: "Created a user-friendly, modern interface for Dr K Gurunath Cardiac Hospital's website to improve online patient experience.",
+      description: "Developed the frontend of Dr K Gurunath Cardiac Hospital's website, creating a responsive and user-friendly interface to showcase hospital services and patient information.",
       type: "Template",
       tags: []
     }
   ];
 
-  // Experience data
+  const additionalProjects = [
+    {
+      id: 5,
+      title: "E-Commerce Platform",
+      subtitle: "Built a full-stack e-commerce solution with React, Node.js, and MongoDB.",
+      description: "A complete online shopping platform with user authentication, product catalog, shopping cart, and payment integration.",
+      type: "Web Application",
+      tags: ["React", "Node.js", "MongoDB", "Stripe"]
+    },
+    {
+      id: 6,
+      title: "Task Management App",
+      subtitle: "Developed a collaborative task management application with real-time updates.",
+      description: "A Kanban-style task management tool with drag-and-drop functionality, team collaboration features, and progress tracking.",
+      type: "Web Application",
+      tags: ["React", "Firebase", "Material-UI"]
+    },
+    {
+      id: 7,
+      title: "Weather Dashboard",
+      subtitle: "Created a responsive weather application with location-based forecasts.",
+      description: "A weather dashboard that displays current conditions, hourly forecasts, and weather maps using third-party API integration.",
+      type: "Mobile App",
+      tags: ["React Native", "API Integration", "Charts"]
+    },
+    {
+      id: 8,
+      title: "Portfolio Template",
+      subtitle: "Designed and developed a reusable portfolio template for developers.",
+      description: "A modern, responsive portfolio template that can be customized for different developers and designers.",
+      type: "Template",
+      tags: ["HTML/CSS", "JavaScript", "Responsive Design"]
+    }
+  ];
+
+  const allProjects = [...initialProjects, ...additionalProjects];
+  const displayedProjects = showAllProjects ? allProjects : initialProjects;
+
+  // Rest of your existing data (experiences, premiumTools, designThoughts) remains the same
   const experiences = [
     {
       id: 1,
       company: "Krishna Software Solutions",
       position: "Software Engineer",
-      period: "2025 - Present",
+      period: "2025 August- Present",
       description: "Leading frontend development team building scalable React applications. Implemented micro-frontend architecture that improved performance by 40%.",
       technologies: ["React", "TypeScript", "Node.js", "AWS"],
       type: "Full-time"
     },
-    // {
-    //   id: 2,
-    //   company: "Digital Solutions LLC",
-    //   position: "Full Stack Developer",
-    //   period: "2020 - 2022",
-    //   description: "Developed and maintained multiple client projects using modern web technologies. Improved application load time by 60% through optimization.",
-    //   technologies: ["Vue.js", "Python", "MongoDB", "Docker"],
-    //   type: "Full-time"
-    // },
     {
       id: 3,
       company: "Ayodhya Webosoft",
       position: "Frontend Developer",
-      period: "2019 - 2020",
+      period: "2025 June-August",
       description: "Built responsive web applications from scratch. Collaborated with design team to implement pixel-perfect UI components.",
       technologies: ["React", "Redux", "SASS", "Firebase"],
       type: "Full-time"
     }
   ];
 
-  // Premium Tools data
   const premiumTools = [
     {
       id: 1,
@@ -122,7 +153,6 @@ const HomePage = () => {
     }
   ];
 
-  // Design Thoughts data
   const designThoughts = [
     {
       id: 1,
@@ -162,6 +192,24 @@ const HomePage = () => {
     }
   ];
 
+  const handleDownload = () => {
+    setIsDownloading(true);
+    
+    // Simulate download process
+    setTimeout(() => {
+      setIsDownloading(false);
+      // Here you would typically trigger the actual download
+      // For now, we'll just log it
+      console.log('Downloading resume...');
+      
+      // You can replace this with actual download logic:
+      // const link = document.createElement('a');
+      // link.href = '/path-to-your-resume.pdf';
+      // link.download = 'Priyansha_Tiwari_Resume.pdf';
+      // link.click();
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 pt-20 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
@@ -178,7 +226,7 @@ const HomePage = () => {
                 <div className="w-full max-w-xs h-80 bg-gradient-to-br from-blue-500/20 via-purple-600/20 to-pink-500/20 rounded-2xl flex items-center justify-center border-2 border-gray-600/30 shadow-2xl overflow-hidden">
                   <img 
                     src="/image.jpg" 
-                    alt="John Doe - Software Engineer"
+                    alt="Priyansha Tiwari - Frontend Developer"
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       // Fallback if image doesn't exist
@@ -188,16 +236,16 @@ const HomePage = () => {
                   />
                   {/* Fallback content if image doesn't load */}
                   <div className="hidden w-full h-full bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 rounded-2xl flex-col items-center justify-center text-white p-4 text-center">
-                    <span className="text-4xl font-bold mb-2">JD</span>
+                    <span className="text-4xl font-bold mb-2">PT</span>
                     <span className="text-lg font-semibold">Priyansha Tiwari</span>
-                    <span className="text-sm opacity-90">Software Engineer</span>
+                    <span className="text-sm opacity-90">Frontend Developer</span>
                   </div>
                 </div>
               </div>
               
               {/* Name */}
               <h2 className="text-3xl font-bold text-white text-center mb-2">
-               Priyansha Tiwari
+                Priyansha Tiwari
               </h2>
               
               {/* Title */}
@@ -212,7 +260,7 @@ const HomePage = () => {
                   About Me
                 </h3>
                 <p className="text-gray-300 text-sm leading-relaxed">
-                  Passionate frontend developer with 4 months of experience 
+                  Passionate frontend developer with +5  months of experience 
                   creating scalable web applications. Love working with modern 
                   technologies and solving complex problems.
                 </p>
@@ -227,7 +275,7 @@ const HomePage = () => {
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center gap-3 text-gray-300">
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                    <span>priyansha.tiwari191@gamil.com</span>
+                    <span>priyansha.tiwari191@gmail.com</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-300">
                     <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
@@ -235,8 +283,8 @@ const HomePage = () => {
                     <span>+91 76920-07518</span>
                   </div>
                   <div className="flex items-center gap-3 text-gray-300">
-                    <div className="w-2 h-2 bg- green-400 rounded-full"></div>
-                    <span>Chhatisghar, India</span>
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span>Chhattisgarh, India</span>
                   </div>
                 </div>
               </div>
@@ -307,18 +355,18 @@ const HomePage = () => {
               <div className="bg-gradient-to-br from-gray-800/40 to-gray-900/20 rounded-3xl p-8 border border-gray-700/50 backdrop-blur-sm shadow-xl">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="text-center group">
-                    <div className="text-4xl font-black text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">+12</div>
-                    <div className="text-gray-400 text-sm uppercase tracking-wider font-medium">Years Experience</div>
+                    <div className="text-4xl font-black text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">+5</div>
+                    <div className="text-gray-400 text-sm uppercase tracking-wider font-medium">Month Experience</div>
                   </div>
                   
                   <div className="text-center group">
-                    <div className="text-4xl font-black text-white mb-2 group-hover:text-purple-400 transition-colors duration-300">+46</div>
+                    <div className="text-4xl font-black text-white mb-2 group-hover:text-purple-400 transition-colors duration-300">+8</div>
                     <div className="text-gray-400 text-sm uppercase tracking-wider font-medium">Projects Completed</div>
                   </div>
                   
                   <div className="text-center group">
-                    <div className="text-4xl font-black text-white mb-2 group-hover:text-green-400 transition-colors duration-300">+20</div>
-                    <div className="text-gray-400 text-sm uppercase tracking-wider font-medium">Worldwide Clients</div>
+                    <div className="text-4xl font-black text-white mb-2 group-hover:text-green-400 transition-colors duration-300">+3</div>
+                    <div className="text-gray-400 text-sm uppercase tracking-wider font-medium">Research Paper Published</div>
                   </div>
                 </div>
               </div>
@@ -388,7 +436,7 @@ const HomePage = () => {
                 <div className="bg-gradient-to-br from-gray-800/40 to-gray-900/20 rounded-3xl p-8 border border-gray-700/50 backdrop-blur-sm shadow-xl">
                   {/* Projects List */}
                   <div className="space-y-6">
-                    {projects.map((project) => (
+                    {displayedProjects.map((project) => (
                       <div 
                         key={project.id}
                         className="bg-gradient-to-br from-gray-800/50 to-gray-900/30 rounded-2xl p-6 border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 group cursor-pointer hover:shadow-xl hover:scale-[1.02]"
@@ -415,12 +463,30 @@ const HomePage = () => {
                               </p>
                             )}
                             
+                            {/* Project Tags */}
+                            {project.tags && project.tags.length > 0 && (
+                              <div className="flex flex-wrap gap-2 mb-3">
+                                {project.tags.map((tag, index) => (
+                                  <span 
+                                    key={index}
+                                    className="px-2 py-1 bg-gray-700/30 text-gray-300 rounded-lg text-xs border border-gray-600/50"
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                            
                             {/* Project Type Badge */}
                             <div className="inline-flex items-center gap-2">
                               <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                                 project.type === 'Portfolio' 
                                   ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
-                                  : 'bg-green-500/20 text-green-300 border border-green-500/30'
+                                  : project.type === 'Web Application'
+                                  ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
+                                  : project.type === 'Mobile App'
+                                  ? 'bg-green-500/20 text-green-300 border border-green-500/30'
+                                  : 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30'
                               }`}>
                                 {project.type}
                               </span>
@@ -440,10 +506,23 @@ const HomePage = () => {
                     ))}
                   </div>
 
-                  {/* View All Projects Button */}
+                  {/* View More/Less Projects Button */}
                   <div className="text-center mt-8">
-                    <button className="bg-gray-700/50 hover:bg-gray-600/50 text-gray-300 hover:text-white py-3 px-8 rounded-xl font-semibold transition-all duration-300 border border-gray-600/50 hover:border-gray-500">
-                      View All Projects
+                    <button 
+                      onClick={() => setShowAllProjects(!showAllProjects)}
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-8 rounded-xl font-semibold transition-all duration-300 border border-gray-600/50 hover:border-gray-500 flex items-center gap-2 mx-auto hover:shadow-lg"
+                    >
+                      {showAllProjects ? (
+                        <>
+                          <FaChevronUp className="w-4 h-4" />
+                          Show Less Projects
+                        </>
+                      ) : (
+                        <>
+                          <FaChevronDown className="w-4 h-4" />
+                          View All Projects
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -454,7 +533,7 @@ const HomePage = () => {
                 {/* Section Header - Two Line Heading */}
                 <div>
                   <h2 className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight">
-                    <span className="text-white">4 MONTHS OF</span>
+                    <span className="text-white">+5 MONTHS OF</span>
                     <br />
                     <span className="text-gray-400">EXPERIENCE</span>
                   </h2>
@@ -601,7 +680,7 @@ const HomePage = () => {
                 </div>
               </div>
 
-              {/* LET'S WORK TOGETHER Section - With Box */}
+              {/* DOWNLOAD RESUME Section - Simplified */}
               <div className="space-y-8">
                 {/* Section Header - Two Line Heading */}
                 <div>
@@ -613,51 +692,75 @@ const HomePage = () => {
                   <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mt-4"></div>
                 </div>
 
-                <div className="bg-gradient-to-br from-gray-800/40 to-gray-900/20 rounded-3xl p-8 border border-gray-700/50 backdrop-blur-sm shadow-xl">
-                  <div className="text-center mb-8">
-                    <p className="text-gray-400 text-lg">
-                      Ready to create something amazing together?
-                    </p>
-                  </div>
-
-                  {/* Steps */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-                    {[
-                      { number: '1', label: 'Project Discussion', sublabel: 'Start', icon: <FaRocket className="w-4 h-4" />, color: 'from-blue-500 to-cyan-500' },
-                      { number: '2', label: 'Planning & Design', sublabel: 'Plan', icon: <FaPlay className="w-4 h-4" />, color: 'from-purple-500 to-pink-500' },
-                      { number: '3', label: 'Development Phase', sublabel: 'Build', icon: <FaSearch className="w-4 h-4" />, color: 'from-green-500 to-emerald-500' },
-                      { number: '4', label: 'Testing & Review', sublabel: 'Test', icon: <FaProjectDiagram className="w-4 h-4" />, color: 'from-yellow-500 to-orange-500' },
-                      { number: '5', label: 'Launch & Support', sublabel: 'Launch', icon: <FaDesktop className="w-4 h-4" />, color: 'from-red-500 to-pink-500' }
-                    ].map((step) => (
-                      <div 
-                        key={step.number}
-                        className="flex items-center gap-4 p-4 bg-gray-700/30 rounded-xl border border-gray-600/50 hover:border-gray-500 transition-all duration-300 cursor-pointer group hover:shadow-lg"
-                      >
-                        <div className={`flex items-center justify-center w-8 h-8 bg-gradient-to-r ${step.color} rounded-lg text-white font-bold text-sm shadow-md`}>
-                          {step.number}
-                        </div>
-                        <div className="flex items-center gap-3 flex-1">
-                          {step.icon}
-                          <div>
-                            <div className="text-gray-300 text-sm group-hover:text-white transition-colors font-medium">
-                              {step.label}
-                            </div>
-                            <div className="text-gray-500 text-xs">
-                              {step.sublabel}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Download Button */}
+                <div className="bg-gradient-to-br from-gray-800/40 to-gray-900/20 rounded-3xl p-12 border border-gray-700/50 backdrop-blur-sm shadow-xl">
                   <div className="text-center">
-                    <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 px-12 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300 mx-auto hover:shadow-2xl hover:scale-105">
-                      <FaDownload className="w-5 h-5" />
-                      Download Resume
+                    <div className="mb-8">
+                      <p className="text-gray-400 text-lg mb-2">
+                        Ready to create something amazing?
+                      </p>
+                      <p className="text-gray-500 text-sm">
+                        Download my resume to learn more about my experience and skills
+                      </p>
+                    </div>
+
+                    {/* Animated Download Button */}
+                    <button 
+                      onClick={handleDownload}
+                      disabled={isDownloading}
+                      className={`
+                        relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 
+                        text-white py-5 px-16 rounded-2xl font-semibold flex items-center justify-center gap-4 
+                        transition-all duration-300 mx-auto hover:shadow-2xl transform
+                        ${isDownloading ? 'scale-95 cursor-not-allowed' : 'hover:scale-105'}
+                        disabled:opacity-80
+                      `}
+                    >
+                      {/* Download Icon with Animation */}
+                      <div className="relative">
+                        <FaDownload className={`w-6 h-6 transition-all duration-300 ${isDownloading ? 'scale-0' : 'scale-100'}`} />
+                        
+                        {/* Loading Animation */}
+                        {isDownloading && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Button Text */}
+                      <span className={isDownloading ? 'opacity-0' : 'opacity-100 transition-opacity'}>
+                       <a href='https://drive.google.com/file/d/1hjiZvhqXWRxW66y0XqOBfvIsgPCG1eNK/view?usp=sharing' target='_blank'>
+                        Download Resume
+                        </a> 
+                      </span>
+                      
+                      {/* Success Checkmark */}
+                      {!isDownloading && (
+                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </div>
+                      )}
+                      
+                      {/* Pulsing Effect */}
+                      {!isDownloading && (
+                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 hover:opacity-20 transition-opacity duration-300 -z-10 animate-pulse"></div>
+                      )}
                     </button>
-                    <p className="text-gray-400 text-sm mt-3">Available for new opportunities</p>
+
+                    {/* Download Status */}
+                    <div className="mt-4 h-6">
+                      {isDownloading && (
+                        <p className="text-blue-400 text-sm animate-pulse">
+                          Preparing your download...
+                        </p>
+                      )}
+                    </div>
+
+                    <p className="text-gray-400 text-sm mt-6">
+                      Available for new opportunities and exciting projects
+                    </p>
                   </div>
                 </div>
               </div>
